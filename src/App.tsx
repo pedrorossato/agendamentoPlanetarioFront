@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Components/Header';
 import Routes from './routes';
 import GlobalStyle from './Styles/global';
 function App() {
