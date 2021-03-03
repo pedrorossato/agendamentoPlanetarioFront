@@ -1,16 +1,14 @@
 import React from 'react';
-import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 
 // import { Container } from './styles';
 
-const Home: React.FC = () => {
+const Contato: React.FC = () => {
   return (
     <>
-      <Header active="Home" />
-      <Footer />
+      <Header active="Contato" />
     </>
   );
 };
 
-export default Home;
+export default Contato;
