@@ -9,6 +9,7 @@ export const Nav = styled.nav`
   justify-content:center;
   align-items:center;
   font-size:1.2rem;
+  border-bottom:10px solid ${Colors.secondary};
   @media screen and (max-width:960px){
     position: relative;
   }
@@ -21,7 +22,7 @@ export const Logo = styled.img`
     @media screen and (max-width:960px){
         position:absolute;
         top:0;
-        left:0;
+        left:10px;
     }
 `;
 

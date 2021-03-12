@@ -5,7 +5,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export interface IHeaderProps {
-  active: string;
+  active?: string;
 }
 const Header: React.FC<IHeaderProps> = ({ active }) => {
   const [clicked, setClicked] = useState(false);
@@ -25,14 +25,14 @@ const Header: React.FC<IHeaderProps> = ({ active }) => {
         )}
       </MenuIcon>
       <Ul className={clicked ? 'active' : ''}>
-        <Li>
-          <StyledLink aria-checked={active === 'Contato'} to="/Contato">
-            Contato
-          </StyledLink>
-        </Li>
-        <Li>
+        {/* <Li>
           <StyledLink aria-checked={active === 'Agendamento'} to="/Agendamento">
             Agendamento
+          </StyledLink>
+        </Li> */}
+        <Li>
+          <StyledLink aria-checked={active === 'Ajuda'} to="/Ajuda">
+            Ajuda
           </StyledLink>
         </Li>
       </Ul>
