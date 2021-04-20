@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, FormItem, StyledButton } from './styles';
-import { Container, FormControl, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { CircularProgress, Container, FormControl, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/material.css'
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ import { Title } from '../../Pages/Home/styles';
 import { getDay } from "date-fns";
 import IAgendamento from '../../Interfaces/agendamento.interface';
 import api from '../../Services/ApiService';
+import { useHistory } from 'react-router';
 
 const FormAgendamento: React.FC = () => {
   const [nome,setNome] = useState<string>('');
@@ -27,7 +28,10 @@ const FormAgendamento: React.FC = () => {
   const [telefoneEscola,setTelefoneEscola] = useState<string>('');
   const [telefoneProfessor,setTelefoneProfessor] = useState<string>('');
   const [alunoDeficiente,setAlunoDeficiente] = useState<string>('');
-  
+
+  const history = useHistory();
+  const [loading,setLoading] = useState<boolean>(false);
+
   const validateDataSessao = (dataSessao:string,horaSessao:string) => {
     const dateformat = new Date(`${dataSessao}T${horaSessao}`);
     return [1,2,3,4,5].includes(getDay(dateformat));
@@ -60,15 +64,18 @@ const FormAgendamento: React.FC = () => {
     }
     console.log(agendamento);
     try {
+      setLoading(true);
       await api.post('/agendamentos',agendamento);
       Swal.fire({
         title:'Sucesso!',
         text:'Agendamento efetuado com sucesso, um email foi enviado ao planetário e logo entraremos em contato.',
         icon: 'success'
       })
+      history.push('/')
     } catch (error) {
       console.log(error);
-      Swal.fire({
+      setLoading(false);
+      return Swal.fire({
         title:'Erro!',
         text:`${error.response.data}`,
         icon: 'error'
@@ -282,7 +289,7 @@ const FormAgendamento: React.FC = () => {
         </FormItem>
         <StyledButton 
           variant="contained"
-          type="submit">Agendar
+          type="submit">{loading ? <CircularProgress/> : 'Agendar'}
         </StyledButton>
       </Form>
     </Container>
