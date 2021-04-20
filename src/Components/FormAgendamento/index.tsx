@@ -7,9 +7,11 @@ import Swal from "sweetalert2";
 // import api from '../../Services/ApiService';
 import { Title } from '../../Pages/Home/styles';
 import { getDay } from "date-fns";
+import IAgendamento from '../../Interfaces/agendamento.interface';
+import api from '../../Services/ApiService';
 
 const FormAgendamento: React.FC = () => {
-  const [name,setName] = useState<string>('');
+  const [nome,setNome] = useState<string>('');
   const [email,setEmail] = useState<string>('');
   const [telefone,setTelefone] = useState<string>('');
   const [sessaoEscolhida, setSessaoEscolhida] = useState<string>('');
@@ -17,8 +19,8 @@ const FormAgendamento: React.FC = () => {
   const [horaSessao,setHoraSessao] = useState<string>('');
   const [instituicao, setInstituicao] = useState<string>('');
   const [municipio, setMunicipio] = useState<string>('');
-  const [serie,setSerie] = useState<number>();
-  const [alunos,setAlunos] = useState<number>();
+  const [serie,setSerie] = useState<string>('');
+  const [alunos,setAlunos] = useState<number>(0);
   const [professor,setProfessor] = useState<string>('');
   const [emailProfessor,setEmailProfessor] = useState<string>('');
   const [tipoEscola,setTipoEscola] = useState<string>('');
@@ -28,18 +30,23 @@ const FormAgendamento: React.FC = () => {
   
   const validateDataSessao = (dataSessao:string,horaSessao:string) => {
     const dateformat = new Date(`${dataSessao}T${horaSessao}`);
-    console.log(dateformat,getDay(dateformat));
     return [1,2,3,4,5].includes(getDay(dateformat));
   }
-  const handleSubmit = (event:React.FormEvent) => {
+  const handleSubmit = async (event:React.FormEvent) => {
     event.preventDefault();
-    console.log(
-      name,
+    if(!validateDataSessao(dataSessao,horaSessao)){
+      return Swal.fire({
+        title:'Erro!',
+        text:'A data selecionada não é um dia útil',
+        icon: 'error'
+      })
+    };
+    const agendamento: IAgendamento = {
+      nome,
       email,
       telefone,
       sessaoEscolhida,
-      dataSessao,
-      horaSessao,
+      dataHoraSessao: `${dataSessao}T${horaSessao}`,
       instituicao,
       municipio,
       serie,
@@ -47,28 +54,38 @@ const FormAgendamento: React.FC = () => {
       professor,
       emailProfessor,
       tipoEscola,
+      telefoneEscola,
       telefoneProfessor,
       alunoDeficiente
-    );
-    if(!validateDataSessao(dataSessao,horaSessao)){
+    }
+    console.log(agendamento);
+    try {
+      await api.post('/agendamentos',agendamento);
+      Swal.fire({
+        title:'Sucesso!',
+        text:'Agendamento efetuado com sucesso, um email foi enviado ao planetário e logo entraremos em contato.',
+        icon: 'success'
+      })
+    } catch (error) {
+      console.log(error);
       Swal.fire({
         title:'Erro!',
-        text:'A data selecionada não é um dia útil',
+        text:`${error.response.data}`,
         icon: 'error'
       })
-    };
+    }
   }
   return (
     <Container style={{backgroundColor:'rgba(255,255,255,0.8)'}} maxWidth="sm">
       <Form onSubmit={handleSubmit}>
-        <Title>Agendar sessão remota</Title>
+        <Title>Agendar sessão virtual</Title>
         <FormItem>
           <TextField 
             type="text" 
             required 
-            label="Nome" 
-            value={name || ''}
-            onChange={(event)=>setName(event.target.value)}
+            label="Seu nome" 
+            value={nome || ''}
+            onChange={(event)=>setNome(event.target.value)}
             placeholder="Insira seu nome"
             style={{width:'100%'}}
           />
@@ -77,7 +94,7 @@ const FormAgendamento: React.FC = () => {
           <TextField 
             type="email" 
             required 
-            label="E-mail"
+            label="Seu e-mail"
             value={email || ''} 
             onChange={(event)=>setEmail(event.target.value)}
             placeholder="Insira seu melhor e-mail"
@@ -86,7 +103,7 @@ const FormAgendamento: React.FC = () => {
         </FormItem>
         <FormItem>
           <PhoneInput
-            specialLabel="Telefone"
+            specialLabel="Seu telefone"
             inputStyle={{width:'100%',backgroundColor:'rgba(255,255,255,0.3)'}}
             country={"br"} 
             value={telefone || ''} 
@@ -154,11 +171,11 @@ const FormAgendamento: React.FC = () => {
         </FormItem>
         <FormItem>
           <TextField 
-            type="number" 
+            type="text" 
             required 
             label="Ano/Série" 
             value={serie || ''}
-            onChange={(event)=>setSerie(parseInt(event.target.value))}
+            onChange={(event)=>setSerie(event.target.value)}
             placeholder="Insira o ano ou série"
             style={{width:'100%'}}
           />
@@ -169,7 +186,7 @@ const FormAgendamento: React.FC = () => {
             InputProps={{inputProps:{min:10}}}
             required 
             label="Número de alunos" 
-            value={alunos || ''}
+            value={alunos > 0 ? alunos : ''}
             onChange={(event)=>setAlunos(parseInt(event.target.value))}
             placeholder="Insira o número de alunos"
             style={{width:'100%'}}

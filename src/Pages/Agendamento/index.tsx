@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../Components/Footer';
 import FormAgendamento from '../../Components/FormAgendamento';
 import Header from '../../Components/Header'
 
@@ -9,6 +10,7 @@ const Agendamento: React.FC = () => {
     <>
       <Header/>
         <FormAgendamento/>
+      <Footer/>
     </>
   );
 };

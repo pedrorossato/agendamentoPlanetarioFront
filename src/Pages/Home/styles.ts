@@ -11,7 +11,7 @@ export const Title = styled.h2`
 export const CardContainer = withStyles({
   root:{
     // margin:'30px',
-    backgroundColor: 'rgba(255,255,255,0.7)' ,
+    backgroundColor: 'rgba(255,255,255,0.8)' ,
     // borderRadius:'20px',
     padding:'1rem',
     textAlign:'center'
