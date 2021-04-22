@@ -4,9 +4,9 @@ import FotoPlanetario from "../../Assets/FundoPlanetarioOpaco.png";
 import { Colors } from '../../Styles/colors';
 
 export const Title = styled.h2`
-  color:${Colors.primary};
+  color:${Colors.primary.blue};
   text-align:center;
-  border-bottom: 2px solid ${Colors.secondary};
+  border-bottom: 2px solid ${Colors.primary.orange};
 `;
 export const CardContainer = withStyles({
   root:{
@@ -20,10 +20,10 @@ export const CardContainer = withStyles({
 export const StyledButton = withStyles({
   root:{
     color:`white`,
-    backgroundColor:`${Colors.secondary}`,
+    backgroundColor:`${Colors.primary.orange}`,
     fontSize:'16px',
     '&:hover': {
-      backgroundColor: `${Colors.primary}`,
+      backgroundColor: `${Colors.primary.blue}`,
     },
   },
 })(Button);

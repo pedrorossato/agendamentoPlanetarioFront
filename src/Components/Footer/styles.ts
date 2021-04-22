@@ -3,9 +3,9 @@ import { Colors } from '../../Styles/colors';
 import { Grid } from '@material-ui/core';
 
 export const StyledGrid = styled(Grid)`
-  border-top:10px solid ${Colors.secondary};
+  border-top:10px solid ${Colors.primary.orange};
   color:white;
-  background-color: ${Colors.primary}
+  background-color: ${Colors.primary.blue}
 `;
 export const StyledAnchor = styled.a`
   text-align: inherit;
@@ -14,6 +14,6 @@ export const StyledAnchor = styled.a`
   font-size:1.8rem;
   transition:all 0.5s ease;
   &:hover {
-    color: ${Colors.secondary}
+    color: ${Colors.primary.orange}
   }
 `;

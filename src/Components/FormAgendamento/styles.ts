@@ -13,10 +13,10 @@ export const StyledButton = withStyles({
     width:'50%',
     alignSelf:'center',
     color:`white`,
-    backgroundColor:`${Colors.secondary}`,
+    backgroundColor:`${Colors.primary.orange}`,
     fontSize:'16px',
     '&:hover': {
-      backgroundColor: `${Colors.primary}`,
+      backgroundColor: `${Colors.primary.blue}`,
     },
   },
 })(Button);

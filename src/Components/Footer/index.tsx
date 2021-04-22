@@ -3,12 +3,21 @@ import { StyledAnchor, StyledGrid } from './styles';
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Grid } from '@material-ui/core';
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-const containerStyle :React.CSSProperties = {
+import useWindowDimensions from '../../Hooks/useWindowDimensions';
+
+const containerStyleDesktop :React.CSSProperties = {
   width: '50%',
   height: '100%',
   position: 'relative'
 };
+const containerStyleMobile :React.CSSProperties = {
+  width: '100vw',
+  height: '200px',
+  position: 'relative'
+};
+
 const Footer: React.FC = () => {
+  const {width} = useWindowDimensions();
   // const { isLoaded } = useJsApiLoader({
   //   id: 'google-map-script',
   //   googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
@@ -40,7 +49,7 @@ const Footer: React.FC = () => {
         <LoadScript
           googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}>
           <GoogleMap
-          mapContainerStyle={containerStyle}
+          mapContainerStyle={width< 960 ? containerStyleMobile : containerStyleDesktop}
           zoom={15}
           center={{ lat: -29.7200449, lng: -53.7172921 }}
           >

@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Colors } from "../../Styles/colors";
 
 export const Nav = styled.nav`
-  background: ${Colors.primary};
+  background: ${Colors.primary.blue};
   height:100px;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:1.2rem;
-  border-bottom:10px solid ${Colors.secondary};
+  border-bottom:10px solid ${Colors.primary.orange};
   @media screen and (max-width:960px){
     position: relative;
   }
@@ -65,7 +65,7 @@ export const Ul = styled.ul`
                 left:0;
                 opacity:1;
                 transition: all 0.5s ease;
-                background-color: ${Colors.primary}
+                background-color: ${Colors.primary.blue}
             `;
         }
     }}
@@ -84,7 +84,7 @@ export const Li = styled.li`
 
 export const StyledLink = styled(Link)`
     &:hover {
-        background-color: ${Colors.secondary}
+        background-color: ${Colors.primary.orange}
     }
     text-decoration:none;
     color: #FFFFFF;
@@ -100,7 +100,7 @@ export const StyledLink = styled(Link)`
     ${props=>{
         if(props['aria-checked']){
             return `
-            background-color: ${Colors.secondary}
+            background-color: ${Colors.primary.orange}
             `;
         }
     }}
