@@ -85,7 +85,7 @@ const FormAgendamento: React.FC = () => {
   return (
     <Container style={{backgroundColor:'rgba(255,255,255,0.8)'}} maxWidth="sm">
       <Form onSubmit={handleSubmit}>
-        <Title>Agendar sessão virtual</Title>
+        <Title>Agendar Sessão Virtual</Title>
         <FormItem>
           <TextField 
             type="text" 

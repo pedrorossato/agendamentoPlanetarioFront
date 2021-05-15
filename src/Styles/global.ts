@@ -1,15 +1,29 @@
 import { createGlobalStyle } from "styled-components";
-import Fundo from "../Assets/FundoPlanetarioOpaco.png"
+import Fundo from "../Assets/Images/FundoPlanetarioOpaco.png"
+import Din from "../Assets/Fonts/D-DIN.otf";
+import DinBold from "../Assets/Fonts/D-DIN-Bold.otf";
 export default createGlobalStyle`
+    @font-face {
+        font-family: 'Din';
+        src: local('Din'), url(${Din}) format('truetype');
+        font-size: 300;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'DinBold';
+        src: local('DinBold'), url(${DinBold}) format('truetype');
+        font-size: 300;
+        font-style: normal;
+    }
     * {
         margin: 0;
         padding: 0;
         outline: 0;
         box-sizing: border-box;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Din', sans-serif;
     }
     #root {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Din', sans-serif;
         height: 100%
     }
     html {
@@ -24,7 +38,7 @@ export default createGlobalStyle`
         -o-background-size: cover;
         background-size: cover;
         font-size: 16pt;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Din', sans-serif;
         /* height: 100vh; */
     }
 `;

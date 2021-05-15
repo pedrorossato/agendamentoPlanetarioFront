@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Logo, MenuIcon, Li, Nav, Ul, StyledLink } from './styles';
-import LogoBranco from '../../Assets/LogoPlanetarioUFSMBranco.png';
+import LogoBranco from '../../Assets/Images/LogoPlanetarioUFSMBranco.png';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
