@@ -68,7 +68,7 @@ const FormAgendamento: React.FC = () => {
       await api.post('/agendamentos',agendamento);
       Swal.fire({
         title:'Sucesso!',
-        text:'Agendamento efetuado com sucesso, um email foi enviado ao planetário e logo entraremos em contato.',
+        text:'Seu agendamento foi efetuado com sucesso. Confira seu e-mail para mais informações! Obrigado!',
         icon: 'success'
       })
       history.push('/')
